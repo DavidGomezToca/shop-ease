@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -46,6 +48,17 @@ class Order
 
     #[ORM\Column(length: 255)]
     private ?string $orderReference = null;
+
+    /**
+     * @var Collection<int, CartHistory>
+     */
+    #[ORM\OneToMany(targetEntity: CartHistory::class, mappedBy: 'productOrder')]
+    private Collection $cartHistories;
+
+    public function __construct()
+    {
+        $this->cartHistories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -180,6 +193,36 @@ class Order
     public function setOrderReference(string $orderReference): static
     {
         $this->orderReference = $orderReference;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CartHistory>
+     */
+    public function getCartHistories(): Collection
+    {
+        return $this->cartHistories;
+    }
+
+    public function addCartHistory(CartHistory $cartHistory): static
+    {
+        if (!$this->cartHistories->contains($cartHistory)) {
+            $this->cartHistories->add($cartHistory);
+            $cartHistory->setProductOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartHistory(CartHistory $cartHistory): static
+    {
+        if ($this->cartHistories->removeElement($cartHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($cartHistory->getProductOrder() === $this) {
+                $cartHistory->setProductOrder(null);
+            }
+        }
 
         return $this;
     }

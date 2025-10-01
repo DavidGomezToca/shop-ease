@@ -28,6 +28,10 @@ class CartHistory
     #[ORM\Column(length: 255)]
     private ?string $orderReference = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cartHistories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Order $productOrder = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class CartHistory
     public function setOrderReference(string $orderReference): static
     {
         $this->orderReference = $orderReference;
+
+        return $this;
+    }
+
+    public function getProductOrder(): ?Order
+    {
+        return $this->productOrder;
+    }
+
+    public function setProductOrder(?Order $productOrder): static
+    {
+        $this->productOrder = $productOrder;
 
         return $this;
     }
