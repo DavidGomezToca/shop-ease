@@ -28,9 +28,9 @@ class CartHistory
     #[ORM\Column(length: 255)]
     private ?string $orderReference = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cartHistories')]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'cartHistories', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Order $productOrder = null;
+    private ?Order $order = null;
 
     public function getId(): ?int
     {
@@ -97,14 +97,14 @@ class CartHistory
         return $this;
     }
 
-    public function getProductOrder(): ?Order
+    public function getOrder(): ?Order
     {
-        return $this->productOrder;
+        return $this->order;
     }
 
-    public function setProductOrder(?Order $productOrder): static
+    public function setOrder(?Order $order): static
     {
-        $this->productOrder = $productOrder;
+        $this->order = $order;
 
         return $this;
     }

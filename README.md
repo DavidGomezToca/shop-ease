@@ -10,7 +10,7 @@
 
 - **STACK :**
 
-  - **Shop Ease** : `0.5.0`
+  - **Shop Ease** : `0.6.0`
   - **PHP** : `8.2.0`
   - **Symfony** : `7.3.3`
   - **Tailwind** : `0.11.1`
