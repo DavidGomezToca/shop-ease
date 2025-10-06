@@ -22,17 +22,18 @@
 			<div class="flex flex-1">
 				<aside class="w-64 bg-white shadow-md">
 					<nav class="mt-5">
-						<a href="" class="block py-2 px-4 hover:bg-blue-100">Dashboard</a>
-						<a href="" class="block py-2 px-4 hover:bg-blue-100">Manage Product</a>
+						<a href="{{path('app_admin')}}" class="block py-2 px-4 hover:bg-blue-100">Dashboard</a>
+						<a href="{{path('app_product')}}" class="block py-2 px-4 hover:bg-blue-100">Manage Product</a>
 						<a href="" class="block py-2 px-4 hover:bg-blue-100">Manage Categories</a>
 						<a href="" class="block py-2 px-4 hover:bg-blue-100">Manage Orders</a>
 						<a href="" class="block py-2 px-4 hover:bg-blue-100">Manage Users</a>
 					</nav>
 				</aside>
-				<main class="flex-1 p-6"> {% block body %}{% endblock %}
-					</main>
-				</div>
+				<main class="flex-1 p-6">
+					Main Admin Content
+					{% block body %}{% endblock %}
+				</main>
 			</div>
-		</body>
-	</html>
-</body></html>
+		</div>
+	</body>
+</html>
