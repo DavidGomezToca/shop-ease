@@ -37,5 +37,30 @@
 				</main>
 			</div>
 		</div>
+		<script>
+			function previewMessage(input){
+				const file = input.files[0];
+				const preview = document.getElementById('imagePreview');
+				const message = document.getElementById('previewMessage');
+				preview.classList.add('hidden');
+				message.classList.add('hidden');
+				message.textContent = '';
+				if (file){
+					const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+					if (!allowedTypes.includes(file.type)){
+						message.textContent = 'Please select a valid image file (JPEG, PNG, GIF, or WEBP).';
+						message.classList.remove('hidden');
+						input.value = '';
+						return;
+					}
+					const reader = new FileReader();
+					reader.onload = function(e){
+						preview.src = e.target.result;
+						preview.classList.remove('hidden');
+					}
+					reader.readAsDataURL(file);
+				}
+			}
+		</script>
 	</body>
 </html>
