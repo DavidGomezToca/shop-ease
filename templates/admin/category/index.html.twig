@@ -23,7 +23,26 @@
 							<th class="py-4 px-6">Actions</th>
 						</tr>
 					</thead>
-					<tbody></tbody>
+					<tbody class="divide-y divide-white-100 text-gray-700">
+						{% for category in categories %}
+							<tr>
+								<td class="py-4 px-6 font-semibold text-gray-500">{{loop.index}}</td>
+								<td class="py-4 px-6 font-semibold text-gray-900">{{category.name}}</td>
+								<td class="py-4 px-6 font-semibold text-green-500">{{category.description}}</td>
+								<td class="py-4 px-6">
+									<a href="" title="View Category" class="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 transition">
+										<span>View</span>
+									</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="3" class="py-6 px-6 text-center text-gray-500 italic">
+									No categories found.
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
 				</table>
 			</div>
 		</div>
